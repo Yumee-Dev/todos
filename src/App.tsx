@@ -94,14 +94,20 @@ function App() {
             +
           </button>
         </div>
-        <div className="todos-list">
+        <div className="todos-list" data-testid="todos-list">
           <ul>
             {selectedTodos.map((todo) => {
               return (
-                <li>
+                <li
+                  key={todo.id}
+                  data-testid={
+                    todo.completed ? "completed-todo" : "active-todo"
+                  }
+                >
                   <button
                     onClick={() => handleClickCircle(todo.id)}
                     className={`circle ${todo.completed ? "completed" : ""}`}
+                    data-testid="completed-circle"
                   ></button>
                   <div
                     className={`todo-text ${todo.completed ? "completed" : ""}`}
@@ -134,7 +140,11 @@ function App() {
               Completed {completedTodos.length}
             </button>
           </div>
-          <div className="clear-completed" onClick={handleClearCompleted}>
+          <div
+            className="clear-completed"
+            data-testid="clear-completed"
+            onClick={handleClearCompleted}
+          >
             <button className="btn">
               <span className="icon">&#x1F5D1;</span>
               <span className="clear-completed-text">Clear completed</span>
